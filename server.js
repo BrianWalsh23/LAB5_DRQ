@@ -38,14 +38,30 @@ app.get('/api/movies', (req, res) => {
             "Poster": "https://example.com/poster3.jpg"
         }
     ];
+    // Instead of res.send we can use res.json to call the json
     res.json({ myMovies: movies });
 });
 
+// Path for index.html
+const path = require('path');
 
+app.get('/index', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+// Handles the Get request from index.html
+app.get('/name', (req, res) => {
+    const firstname = req.query.firstname;
+    const lastname = req.query.lastname;
+    res.send(`Hello ${firstname} ${lastname}`);
+});
+
+// Serves static files from public directory
+app.use(express.static('public'));
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something went wrong!');
-    res.status(201).json({ movies });
+    res.status(200).json({ movies });
 });
 
 // Listening on port 3000
