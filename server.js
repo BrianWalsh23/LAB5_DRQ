@@ -71,6 +71,7 @@ app.post('/name', (req, res) => {
 
 // Serves static files from public directory
 app.use(express.static('public'));
+// Error handling. Will show "Something went wrong!"
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something went wrong!');
