@@ -8,12 +8,14 @@ app.get('/', (req, res) => {
     res.send('Welcome to Data Respresentation & Querying');
 });
 
+// Gets name and surname through URL /:name/:surname
 app.get('/hello/:name/:surname', (req, res) => {
     const name = req.params.name;
     const surname = req.params.surname;
     res.send(`Hello ${name} ${surname}`);
 });
 
+// Get our JSON movies from @ /api/movies
 app.get('/api/movies', (req, res) => {
     const movies = [
         {
